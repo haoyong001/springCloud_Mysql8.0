@@ -1,0 +1,41 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: cloud-payment-service
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - VMware.*  # 忽略虚拟机网卡
+      use-only-site-local-interfaces: true
+      preferred-networks: 192.168.0.* # 优先使用 192.168.0.*
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource  #当前数据源操作类型
+    url: jdbc:mysql://192.168.201.128:3306/mysql?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver    #MySQL驱动包jdbc:mysql://192.168.201.128:3306
+    #url: characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    #useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: haoyong
+#connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;password=${spring.datasource.password}
+
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  type-aliases-package: com.atguigu.springcloud.entities #所有Entity别名类所在包
+
+eureka:
+  client:
+    #true表示酱紫自己注册进eureka server
+    register-with-eureka: true
+    #true默认值,从eureka server抓取已有的注册信息,单节点无所谓,集群必须设置为true才能配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      #defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+  #配置主机名称
+  instance:
+    instance-id: payment8002
+    prefer-ip-address: true
