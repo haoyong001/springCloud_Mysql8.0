@@ -23,6 +23,7 @@
         <module name="cloud-consumner-consul-order80" />
         <module name="cloud-provider-hystrix-payment8001" />
         <module name="cloud-provider-consul-payment8006" />
+        <module name="cloud-config-client-3355" />
         <module name="cloud-consumer-feign-order80" />
       </profile>
     </annotationProcessing>

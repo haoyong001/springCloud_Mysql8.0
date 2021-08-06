@@ -8,13 +8,17 @@ spring:
     config:
       server:
         git:
-          uri: git@github.com:haoyong001/springcloud-config.git
+          uri: https://github.com/haoyong001/springcloud-config.git
           search-paths:
             - springcloud-config
-      label: main
+      label: master
 
 #注册eureka
 eureka:
+  instance:
+    hostname: springcloud-config-center
   client:
+    fetch-registry: true
+    register-with-eureka: true
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka
