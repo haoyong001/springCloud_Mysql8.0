@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Mr. Hao
- * @date 2021-08-10   15:19
+ * @date 2021-08-11   9:54
  */
 @RestController
-@RefreshScope//手动刷新：如果配置文件修改了，不想重启3355，
-// 需要运维人员发送post请求，刷新3355 curl -X POST "http://localhost:3355/actuator/refresh"
-public class ConfigClientController {
+@RefreshScope //要想自动刷新配置文件，必须用次注解
+public class ConfigClientController3366 {
     @Value("${config.info}")
     private String configInfo;
 
@@ -21,7 +20,7 @@ public class ConfigClientController {
 
     @GetMapping("/getConfigInfo")
     public String getConfigInfo() {
-        System.out.println("访问的3355：" + configInfo);
+        System.out.println("访问的3366：" + configInfo);
         return port + ":" + configInfo;
     }
 }

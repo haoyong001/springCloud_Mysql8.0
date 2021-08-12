@@ -1,5 +1,5 @@
 server:
-  port: 3355
+  port: 3366
 
 spring:
   application:
@@ -23,11 +23,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka
-  #配置主机显示名称
+    #配置主机显示名称
   instance:
-    instance-id: config-client3355
+    instance-id: config-client3366
     prefer-ip-address: true
-
 #暴露监控端点
 management:
   endpoints:

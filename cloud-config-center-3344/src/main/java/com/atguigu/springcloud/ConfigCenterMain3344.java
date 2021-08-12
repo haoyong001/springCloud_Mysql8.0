@@ -11,7 +11,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @EnableConfigServer
-@EnableEurekaClient
+@EnableEurekaClient//手动刷新配置文件：curl -X POST "http://localhost:3344/actuator/bus-refresh"
+//刷新指定的客户端：curl -X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355"  在eureka的服务名加端口号
 public class ConfigCenterMain3344 {
     public static void main(String[] args) {
         SpringApplication.run(ConfigCenterMain3344.class, args);
