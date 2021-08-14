@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Mr. Hao
- * @date 2021-06-09   17:26
+ * @date 2021-06-09   17:26@Component
  */
 @Component
 public class Mylb implements LoadBalanced {

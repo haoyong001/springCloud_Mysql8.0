@@ -25,7 +25,7 @@ spring:
           #uri: http://localhost:8001
           uri: lb://cloud-payment-service   #匹配后提供服务的路由地址
           predicates:
-            - Path=/payment/lb/**
+            - Path=/payment/*/**
       discovery:
         locator:
           enabled: true                #开启从注册中心动态创建路由的功能，利用微服务名进行路由
@@ -37,4 +37,4 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://eureka7001.com:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka

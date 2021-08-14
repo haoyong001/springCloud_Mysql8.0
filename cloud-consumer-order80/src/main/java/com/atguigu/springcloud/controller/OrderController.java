@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.net.URI;
-import java.sql.SQLOutput;
 import java.util.List;
 
 /**
@@ -35,7 +34,7 @@ public class OrderController {
 
     //引入自定义的负载均衡算法
     @Resource
-    private LoadBalanced loadBalanced;
+    public LoadBalanced loadBalanced;
 
     @PostMapping("/consumer/payment/create")
     public CommonResult<Payment> create(Payment payment) {
@@ -48,7 +47,19 @@ public class OrderController {
     @GetMapping("/consumer/payment/get/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable Long id) {
         log.info("***********consumer查询");
-        return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+
+        //使用restTemplate的负载均衡
+        //return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+
+        //使用自定义的算法的loadBalanced负载均衡
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        if (instances == null || instances.size() == 0) {
+            return null;
+        }
+        ServiceInstance instance = loadBalanced.instance(instances);
+        URI uri = instance.getUri();
+        System.out.println("uri:=====" + uri);
+        return restTemplate.getForObject(uri + "/payment/get/" + id, CommonResult.class);
     }
 
     @GetMapping("/consumer/payment/delete/{id}")
@@ -68,5 +79,20 @@ public class OrderController {
         String port = restTemplate.getForObject(uri + "/payment/lb", String.class);
         System.out.println(port);
         return "********访问的是:" + port;
+    }
+
+    /*开启负载均衡,服务提供者集群配置的时候,消费者以服务名称寻址,就需要这个注解@LoadBalanced在restTemplate,
+     赋予RestTemplate负载均衡能力,如果用自定义的loadBalanced负载均衡，就需要关闭restTemplate这个负载均衡
+     */
+    @GetMapping("/consumer/payment/zipkin")
+    public String getZipkin() {
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        if (instances == null || instances.size() == 0) {
+            return null;
+        }
+        ServiceInstance instance = loadBalanced.instance(instances);
+        URI uri = instance.getUri();
+        System.out.println("uri:=====" + uri);
+        return restTemplate.getForObject(uri + "/payment/zipkin", String.class);
     }
 }

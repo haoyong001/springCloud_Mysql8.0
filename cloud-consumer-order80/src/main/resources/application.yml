@@ -10,6 +10,12 @@ spring:
         - VMware.*  # 忽略虚拟机网卡
       use-only-site-local-interfaces: true
       preferred-networks: 192.168.0.* # 优先使用 192.168.0.*
+  #链路跟踪
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1
 
 eureka:
   client:

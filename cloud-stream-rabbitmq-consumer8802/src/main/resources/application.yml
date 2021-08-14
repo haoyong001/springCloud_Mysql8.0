@@ -29,6 +29,7 @@ spring:
           content-type: application/json
           #default-binder: rabbit
           binder: defaultRabbit
+          group: consumer_group001  #相同分组，生产的消息，只会被同一组的其中一个消费者消费一次，不同分组则都会消费一次这个消息
 
 
 eureka:

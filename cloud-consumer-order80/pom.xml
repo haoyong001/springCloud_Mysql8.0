@@ -17,6 +17,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <!--包含了seluth和zipkin-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
         <!--eureka-client 已经集成了ribbon复杂均衡-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

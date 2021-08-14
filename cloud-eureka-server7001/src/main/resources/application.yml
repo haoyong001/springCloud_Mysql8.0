@@ -33,10 +33,10 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       #单机版
-      defaultZone: http://eureka7001.com:7001/eureka/
+      #defaultZone: http://eureka7001.com:7001/eureka/
       #http://${eureka.instance.hostname}:${server.port}/eureka/
       #集群版
-      #defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
   server:
     #关闭eureka的自我保护机制,保证不可用服务被及时剔除
     enable-self-preservation: false
