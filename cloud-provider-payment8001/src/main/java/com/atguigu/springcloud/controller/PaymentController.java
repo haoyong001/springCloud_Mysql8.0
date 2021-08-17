@@ -84,7 +84,7 @@ public class PaymentController {
     public String paymentFeignTimeout() {
         //暂停几秒钟线程
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
