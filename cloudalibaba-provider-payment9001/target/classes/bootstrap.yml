@@ -1,0 +1,20 @@
+server:
+  port: 9001
+spring:
+  profiles:
+    active: dev
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848    #配置Nacos地址
+      config:
+        server-addr: localhost:8848   #nacos配置中心地址  nacos-payment-provider-dev.yaml
+        file-extension: yaml  #制定yaml格式的配置
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

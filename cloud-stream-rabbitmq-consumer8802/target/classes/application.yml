@@ -1,0 +1,43 @@
+server:
+  port: 8802
+
+spring:
+  application:
+    name: cloud-stream-consumer
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  cloud:
+    stream:
+      binders:
+        defaultRabbit: #表示定义的名称，用于binding整合
+          type: rabbit #消息组件类型
+            #environment: #没置rabbitmq,的相关的环境配置
+            #spring:
+            #rabbitmq:
+            #host: localhost
+            #port: 5672
+          #username: guest
+          #password: guest
+      bindings:
+        input:
+          destination: studyExchange
+          content-type: application/json
+          #default-binder: rabbit
+          binder: defaultRabbit
+          group: consumer_group001  #相同分组，生产的消息，只会被同一组的其中一个消费者消费一次，不同分组则都会消费一次这个消息
+
+
+eureka:
+  client: #客户端进行Eureka主册的配置
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 2 #设置心跳的时间问隔（默认是30秒)
+    lease-expiration-duration-in-seconds: 5 #如果现在超过了5秒的问隔（默认是90秒)
+    instance-id: receive-8802.com #在信息列表时显示主机名称
+    prefer-ip-address: true #访问的路径变为IP地址

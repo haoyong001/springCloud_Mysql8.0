@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    #DataId区分开发测试环境方案
+    #active: dev  #表示开发环境
+    #active: test  #表示测试环境
+    active: info  #当以分组的区分形式区分开发和测试环境的时候，这里最好统一，这样只修改bootstrap.yml的group就可以了
+
+
+#${ spring.application.name}-${spring.profile.active}.${spring.cLoud.nacos.config.file-extension}
+#上面的公式表达的意思是，服务名-dev.yaml
