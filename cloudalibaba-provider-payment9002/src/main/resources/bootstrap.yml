@@ -1,0 +1,22 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        #server-addr: localhost:8848    #配置iNacos地址
+        server-addr: 192.168.201.128:1111 #注册进linux上的nacos，通过nginx代理
+        service: nacos-payment-provider  #服务名，不配置默认就是application.name
+      config:
+        server-addr: 192.168.201.128:1111   #nacos配置中心地址
+        file-extension: yaml  #制定yaml格式的配置
+        #group: DEV_GROUP
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
