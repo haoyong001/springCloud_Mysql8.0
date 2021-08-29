@@ -8,10 +8,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848 #nacos注册中心地址
+        #server-addr: localhost:8848 #nacos注册中心地址
+        server-addr: 192.168.201.128:1111
         namespace: ab789750-88b3-4458-87c7-4a80f860cae2 #服务注册在开发环境命名空间
       config:
-        server-addr: localhost:8848   #nacos配置中心地址
+        #server-addr: localhost:8848   #nacos配置中心地址
+        server-addr: 192.168.201.128:1111
         file-extension: yaml  #制定yaml格式的配置
         group: DEV_GROUP  #以分组的区分形式，区分开发和测试环境，前提是在nacos配置管理页面先新建好这个分组DEV_GROUP
         namespace: ab789750-88b3-4458-87c7-4a80f860cae2 #配置文件开发环境命名空间的流水号  、测试环境命名空间的流水号
