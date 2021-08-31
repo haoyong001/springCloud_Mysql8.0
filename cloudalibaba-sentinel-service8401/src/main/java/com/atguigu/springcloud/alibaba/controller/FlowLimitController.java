@@ -55,4 +55,10 @@ public class FlowLimitController {
     public String blocHotKeyException(String p1, String p2, BlockException blockException) {
         return "p1:" + p1 + ",p2:" + p2 + ",热点数据异常！请稍后再试！";
     }
+
+    @GetMapping("/ratelimit/byUrl")
+    @SentinelResource(value = "testRate")
+    public String testRate(@RequestParam(value = "p1", required = false) String p1, @RequestParam(value = "p2", required = false) String p2) {
+        return "********testRate测试流控规则持久化**********";
+    }
 }
