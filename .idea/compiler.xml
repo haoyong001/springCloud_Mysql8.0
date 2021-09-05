@@ -11,6 +11,7 @@
         <module name="cloud-eureka-server7003" />
         <module name="cloudalibaba-nacos-config-client3377" />
         <module name="cloud-eureka-server7002" />
+        <module name="seata-order-service2001" />
         <module name="cloud-provider-payment-zookeeper8004" />
         <module name="cloudalibaba-consumer-nacos-order84" />
         <module name="cloud-consumer-feign-hystrix-order80" />
@@ -33,6 +34,8 @@
         <module name="cloudalibaba-provider-payment9001" />
         <module name="cloud-gateway-gateway9527" />
         <module name="cloudalibaba-consumer-nacos-order83" />
+        <module name="seata-account-service2003" />
+        <module name="seata-storage-service2002" />
         <module name="cloud-consumer-order80" />
         <module name="cloudalibaba-sentinel-service8401" />
         <module name="cloud-provider-consul-payment8006" />
