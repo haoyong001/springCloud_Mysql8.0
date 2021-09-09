@@ -3,14 +3,21 @@ package com.atguigu.springcloud.controller;
 import com.atguigu.springcloud.entities.CommonResult;
 import com.atguigu.springcloud.entities.Payment;
 import com.atguigu.springcloud.service.PaymentService;
+import com.atguigu.springcloud.util.IdGeneratorSnowflake;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,7 +35,7 @@ public class PaymentController {
     private String serverPort;
     @Resource
     private DiscoveryClient discoveryClient;
-
+    public static final Logger LOGGER = LoggerFactory.getLogger(PaymentController.class);
     @PostMapping(value = "/payment/create")
     public CommonResult create(@RequestBody Payment payment) {
         int result = paymentService.create(payment);
@@ -94,5 +101,37 @@ public class PaymentController {
     @GetMapping("/payment/zipkin")
     public String getZipkin() {
         return serverPort + ":hi,i am zipkin welcome to my home";
+    }
+
+    @Resource
+    private IdGeneratorSnowflake snowflake;
+
+    @GetMapping("/payment/getsnowflake")
+    public String getSnowFlake(HttpServletResponse response) {
+        ExecutorService threadPool = Executors.newFixedThreadPool(5);
+        for (int i = 0; i < 20; i++) {
+            threadPool.submit(() -> {
+                long snowflakeId = snowflake.snowflakeId();
+                System.out.println(snowflake.snowflakeId());
+            });
+        }
+        threadPool.shutdown();
+        String s1 = "获取雪花算法全局唯一ID成功！";
+        String s2 = "";
+        try {
+            s2 = new String(s1.getBytes("UTF-8"), "ISO-8859-1");
+            System.out.println(s2);
+            String s11 = new String("测试".getBytes("GBK"), "iso-8859-1");
+            System.out.println(s11);
+            byte[] bytes = s2.getBytes("iso-8859-1");
+            System.out.println(bytes);
+            String s12 = new String(bytes, "UTF-8");
+            System.out.println("s12:" + s12);
+//            response.setContentType ("text/html;charset=UTF-8");
+//            response.getWriter().write("获取雪花算法全局唯一ID成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s2;
     }
 }
