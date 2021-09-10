@@ -6,6 +6,7 @@ import com.atguigu.springcloud.service.PaymentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @author Mr. Hao
@@ -30,5 +31,10 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public int delete(Long id) {
         return paymentDao.delete(id);
+    }
+
+    @Override
+    public int delByTime(String payment, Date time) {
+        return paymentDao.delByTime(payment, time);
     }
 }

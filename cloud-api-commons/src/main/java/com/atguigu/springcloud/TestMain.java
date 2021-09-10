@@ -1,12 +1,12 @@
 package com.atguigu.springcloud;
 
 import lombok.Getter;
+import org.springframework.format.datetime.DateFormatter;
 import sun.misc.Unsafe;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -17,6 +17,26 @@ public class TestMain {
     static volatile int j = 0;
 
     public static void main(String[] args) {
+        //按天减去日期
+        SimpleDateFormat sj = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(new Date());
+        calendar1.add(Calendar.DATE, -13);
+        String dayDate = sj.format(calendar1.getTime());
+        System.out.println(dayDate);
+        //按月减去日期
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(new Date());
+        calendar2.add(Calendar.MONTH, -13);
+        String monthDate = sj.format(calendar2.getTime());
+        System.out.println(monthDate);
+        //按年减去日期
+        Calendar calendar3 = Calendar.getInstance();
+        calendar3.setTime(new Date());
+        calendar3.add(Calendar.YEAR, -13);
+        Date time = calendar3.getTime();
+        String yearDate = sj.format(calendar3.getTime());
+        System.out.println(yearDate);
         /*System.out.println("开始收集龙珠*************CyclicBarrier不会阻塞主线程");
         cyclicBarrierTest();
         System.out.println("结束收集龙珠***********CyclicBarrier不会阻塞主线程");
@@ -31,7 +51,7 @@ public class TestMain {
         semaphoreTest();
         System.out.println("抢车位结束*********Semaphore不会阻塞主线程");
         OutOfMemoryErrorheapspaceTest();*/
-        StackOverflowErrorTest();
+//        StackOverflowErrorTest();
     }
 
     /*模拟堆溢出*/

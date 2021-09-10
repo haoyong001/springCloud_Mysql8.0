@@ -4,6 +4,8 @@ import com.atguigu.springcloud.entities.Payment;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+
 /**
  * @author Mr. Hao
  * @date 2021-06-01   0:18
@@ -15,4 +17,6 @@ public interface PaymentDao {
     public Payment getPaymentById(@Param("id") Long id);
 
     public int delete(@Param("id") Long id);
+
+    int delByTime(@Param("payment") String payment, @Param("time") Date time);
 }

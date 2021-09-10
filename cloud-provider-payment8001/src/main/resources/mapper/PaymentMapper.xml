@@ -21,4 +21,9 @@
         from payment
         where id = #{id}
     </delete>
+    <delete id="delByTime">
+        delete
+        from ${payment}
+        where updatetime &lt;= #{time}
+    </delete>
 </mapper>

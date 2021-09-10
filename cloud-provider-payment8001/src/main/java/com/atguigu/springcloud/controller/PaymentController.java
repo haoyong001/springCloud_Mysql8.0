@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -133,5 +136,18 @@ public class PaymentController {
             e.printStackTrace();
         }
         return s2;
+    }
+
+    @GetMapping("/payment/deleteByTime")
+    public int delByTime() {
+        SimpleDateFormat sj = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar3 = Calendar.getInstance();
+        calendar3.setTime(new Date());
+        calendar3.add(Calendar.YEAR, -13);
+        Date time = calendar3.getTime();
+        String yearDate = sj.format(calendar3.getTime());
+        System.out.println(yearDate);
+        int i = paymentService.delByTime("payment", time);
+        return i;
     }
 }
